@@ -17,8 +17,8 @@ const multer = require("multer")
  *           color:
  *             type: string
  *             description: this is category color
- *           image:
- *             type: string
+ *           file:
+ *             type: file
  *         example:
  *           _id: dfs43gfsdghshdsj
  *           category_name: kisan mahat
@@ -64,14 +64,14 @@ router.get("/", Category.getCategory);
 router.get("/:id", Category.getCategorys)
 /**
  * @swagger
- * /category:
+ * /category/files:
  *  post:
  *    summary: create new category
  *    tags: [Category]
  *    requestBody:
  *      required: true
  *      content:
- *        application/json:
+ *        multipart/form-data:
  *          schema:
  *            $ref: '#/components/schemas/categoryDto'
  *    responses:
