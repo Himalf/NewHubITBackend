@@ -24,7 +24,7 @@ module.exports.PostCourse = async (req, res, upload) => {
   const courseData = req.body;
 
   try {
-    console.log(courseData, req.file, "worked");
+    console.log(courseData, req.file, req.files, "worked");
     // const file = `${process.env.APP_HOSTING_ADDRESS + req.file.filename}`;
     const url = req.protocol + "://" + req.get("host");
     const newCourse = new CourseModal({
@@ -33,9 +33,9 @@ module.exports.PostCourse = async (req, res, upload) => {
       duration: courseData.duration,
       description: courseData.description,
       syallabus: [],
-      image: req?.file?.path,
+      image: req?.files[0].firebaseUrl,
     });
-
+    console.log(req?.files[0].firebaseUrl)
     await newCourse.save();
     res
       .status(201)

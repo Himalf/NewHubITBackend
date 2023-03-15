@@ -1,4 +1,5 @@
 var express = require("express");
+var uploadImage = require('../service/firebase')
 var Course = require("../controller/Courses");
 const path = require("path");
 const multer = require("multer");
@@ -103,10 +104,11 @@ const storage = multer.diskStorage({
     );
   },
 });
-const upload = multer({ storage: storage });
+const upload = multer({ storage: multer.memoryStorage(), });
 router.post(
   "/files",
-  upload.single("file"),
+  upload.any("file"),
+  uploadImage,
   Course.PostCourse
   // Course.PostCourse
 );
